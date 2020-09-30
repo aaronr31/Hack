@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const MongoClient = require('mongodb').MongoClient;
 
-const uri = "mongodb+srv://Aaron:FWzrE3LkyShVgcwG@users.rutzq.mongodb.net/Users?retryWrites=true&w=majority";
+const uri = MONGOCONNECTION
 const app = express();
 var tokens = new Map();
 app.use(cookieParser());
@@ -51,8 +51,8 @@ client.connect(err => {
         port: 465,
         secure: true,
         auth: {
-            user: 'ariecktutor@gmail.com',
-            pass: 'Ajrd0g123456'
+            user: EMAIL,
+            pass: PASSWORD
         }
     })
 
@@ -140,8 +140,8 @@ client.connect(err => {
                 port: 465,
                 secure: true,
                 auth: {
-                    user: 'ariecktutor@gmail.com',
-                    pass: 'Ajrd0g123456'
+                    user: EMAIL,
+                    pass: PASSWORD
                 }
             })
 
