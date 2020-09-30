@@ -1,0 +1,31 @@
+<h1 style="text-align: center; padding-top: 10vh">User Database</h1>
+<div style="margin: auto; padding-top: 5vh;">
+    <form action="/confirm" method="POST">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Confirmed?</th>
+                    <th scope="col">Confirm</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each usernames}}
+                    <tr>
+                        <td>{{username}}</td>
+                        <td>{{confirmed}}</td>
+                        <td><input type="radio" name="username" value="{{username}}"></td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <div style="margin: auto; width: 10%;">
+            <button type="submit" class="btn btn-primary">Confirm</button>
+        </div>
+    </form>
+    <form action="/" method="GET" style="margin-top: 20px">
+        <div style="margin: auto; width: 10%;">
+            <button type="submit" class="btn btn-primary">Logout</button>
+        </div>
+    </form>
+</div>

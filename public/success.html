@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link rel="stylesheet" href="style.css">
+        <title>Welcome to our Room!</title>
+    </head>
+    <body class="open">
+        <h1 style="font-size: 50pt; color: rgb(100, 100, 200); text-shadow: 2px 2px 4px black;">You're in!</h1>
+        <form method="POST" action="https://api.particle.io/v1/devices/27003d000e504b5350313120/move?access_token=14230a4a722f0802ddda74ea5026d2af887fd968" id="open"></form>
+        <button type="submit" form="open" value="Submit" class="submit" style="height: 50px; width: 300px;">Open!</button>
+        <form method="GET" action="/logout" id="logout"></form>
+        <button type="submit" form="logout" value="Submit" class="submit" style="height: 50px; width: 300px;">Log Out!</button>
+    </body>
+</html>

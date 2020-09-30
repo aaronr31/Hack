@@ -1,0 +1,22 @@
+<div class="home">
+    <h1 id="title">Welcome to my room!</h1>
+    <form class="form" action="/login" method="POST" class="form" id="login" style="color: white; margin-top: 10vh">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control form-control-lg" id="username" placeholder="Enter username" name="username">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control form-control-lg" id="password" placeholder="Password" name="password">
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">Submit</button>
+    </form>
+    <form class="form" method="GET" action="/create" id="create">
+        <button type="submit" class="btn btn-primary" style="margin-bottom: 25px;">Create a profile</button>
+    </form>
+    {{#if message}}
+        <div class="alert {{messageClass}}" role="alert" style="width: 30vw; margin: auto; text-align: center">
+            {{message}}
+        </div>
+    {{/if}}
+</div>

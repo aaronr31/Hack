@@ -1,0 +1,60 @@
+.home {
+    background: url("Glenn.gif") no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+}
+
+.open {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: darkgray;
+}
+
+#title {
+    text-align: center;
+    font-size: 100pt;
+    text-shadow: 2px 2px 4px black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: rgba(100, 100, 200, 0.8);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+label {
+    padding: 10px;
+}
+
+input {
+    padding: 10px;
+}
+
+.submit {
+    margin: 15px;
+    width: 190px;
+    background-color: red;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    height: 40px;
+}
+
+.submit:hover {
+    background-color: rgb(200, 20, 20);
+}
+
+@media screen and (max-width: 1000px) {
+    #title {
+        font-size: 50pt;
+    }
+
+    .submit {
+        width: 100px;
+    }
+}
