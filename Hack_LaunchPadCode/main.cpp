@@ -21,7 +21,7 @@ Pin RED_LED = Pin(P1, 0);
 Pin S1 = Pin(P1, 1);
 Pin S2 = Pin(P1, 4);
 Pin PHOTON_IN = Pin(P6, 6);
-Pin PHOTON_OUT = Pin(P6, 7);
+Pin PHOTON_OUT = Pin(P5, 6);
 Pin S_EXT = Pin(P3, 6);
 
 
