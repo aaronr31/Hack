@@ -36,7 +36,7 @@ void setup(void) {
     stepper = new Stepper(Pin(P2, 3), Pin(P3, 5), Pin(P5, 1), Pin(P3, 7));
     stepper->setSpeed(STEPPER_SPEED);
 
-    zero();
+//    zero();
 
 }
 
@@ -78,7 +78,7 @@ void turnHandle(void) {
 
     stepper->step(-HANDLE_TURN_STEPS);
 
-    zero();
+//    zero();
 }
 
 
