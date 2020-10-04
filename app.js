@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const MongoClient = require('mongodb').MongoClient;
 
-const uri = MONGOCONNECTION
+const uri = "mongodb+srv://MONGOPASSWORD
 const app = express();
 var tokens = new Map();
 app.use(cookieParser());
@@ -26,13 +26,22 @@ function getToken() {
 }
 
 //connection to db
-const client = new MongoClient(uri, { useUnifiedTopology: true }, { useNewUrlParser: true });
+const client = new MongoClient(uri, { useUnifiedTopology: true }, { useNewUrlParser: true }, err => {
+    if (err) throw error;});
 client.connect(err => {
   const collection = client.db("Users").collection("Users");
   if (err) throw err;
 
   //adding new user to db
   app.post('/create_user', function(req, res) {
+    //check if passwords match
+    if (req.body.password != req.body.confirm_password) {
+        res.render('create', {
+            message: 'Passwords must match',
+            messageClass: 'alert-danger'
+        });
+        return;
+    }
     const hashedPassword = hashPassword(req.body.password);
     const user = {
         username: req.body.username,
@@ -140,8 +149,8 @@ client.connect(err => {
                 port: 465,
                 secure: true,
                 auth: {
-                    user: EMAIL,
-                    pass: PASSWORD
+                   user: EMAIL,
+                   pass: PASSWORD
                 }
             })
 
