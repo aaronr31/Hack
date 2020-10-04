@@ -1,10 +1,3 @@
-/*
- * Stepper.cpp
- *
- *  Created on: Sep 28, 2020
- *      Author: Russell
- */
-
 #include <Stepper.h>
 
 Stepper::Stepper(Pin pin1, Pin pin2, Pin pin3, Pin pin4) :

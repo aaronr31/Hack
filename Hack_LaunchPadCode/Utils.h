@@ -1,10 +1,3 @@
-/*
- * Utils.h
- *
- *  Created on: Sep 28, 2020
- *      Author: Russell
- */
-
 #ifndef UTILS_H_
 #define UTILS_H_
 
@@ -15,19 +8,36 @@ enum PinMode {OUTPUT, INPUT, INPUT_PULLUP};
 enum DigitalIO {LOW, HIGH};
 
 
+/**
+ * Contains various helper methods to make certain operations simpler.
+ *
+ * Each pin manipulation method is overloaded to handle both odd and even pin ports.
+ */
 class Utils
 {
 public:
+    /**
+     * Writes HIGH or LOW to the pin identified by the pinGroup and pin (index).
+     */
     static void digitalWrite(DIO_PORT_Odd_Interruptable_Type *pinGroup, uint8_t pin, enum DigitalIO output) {
         pin = 1 << pin;
         pinGroup->OUT = (pinGroup->OUT & (~pin)) | (pin * output);
     }
+
+
+    /**
+     * Writes HIGH or LOW to the pin identified by the pinGroup and pin (index).
+     */
 
     static void digitalWrite(DIO_PORT_Even_Interruptable_Type *pinGroup, uint8_t pin, enum DigitalIO output) {
         pin = 1 << pin;
         pinGroup->OUT = (pinGroup->OUT & (~pin)) | (pin * output);
     }
 
+
+    /**
+     * Reads HIGH or LOW from the pin identified by the pinGroup and pin (index).
+     */
     static enum DigitalIO digitalRead(DIO_PORT_Odd_Interruptable_Type *pinGroup, uint8_t pin) {
         pin = 1 << pin;
         if (pinGroup->IN & pin)
@@ -37,6 +47,10 @@ public:
         return LOW;
     }
 
+
+    /**
+     * Reads HIGH or LOW from the pin identified by the pinGroup and pin (index).
+     */
     static enum DigitalIO digitalRead(DIO_PORT_Even_Interruptable_Type *pinGroup, uint8_t pin) {
         pin = 1 << pin;
         if (pinGroup->IN & pin)
@@ -46,6 +60,10 @@ public:
         return LOW;
     }
 
+
+    /**
+     * Sets the PinMode (OUTPUT, INPUT, INPUT_PULLUP) of the pin identified by the pinGroup and pin (index).
+     */
     static void pinMode(DIO_PORT_Even_Interruptable_Type *pinGroup, uint8_t pin, enum PinMode mode) {
         pin = 1 << pin;
         pinGroup->SEL0 &= ~pin;
@@ -70,6 +88,10 @@ public:
         }
     }
 
+
+    /**
+     * Sets the PinMode (OUTPUT, INPUT, INPUT_PULLUP) of the pin identified by the pinGroup and pin (index).
+     */
     static void pinMode(DIO_PORT_Odd_Interruptable_Type *pinGroup, uint8_t pin, enum PinMode mode) {
         pin = 1 << pin;
         pinGroup->SEL0 &= ~pin;
@@ -94,12 +116,17 @@ public:
         }
     }
 
-    // Initialize SysTick with busy wait running at bus clock.
+    /**
+     *  Initialize SysTick with busy wait running at bus clock.
+     */
     static void SysTick_Init(void){
       SysTick->LOAD = 0x00FFFFFF;           // maximum reload value
       SysTick->CTRL = 0x00000005;           // enable SysTick with no interrupts
     }
 
+    /**
+     * Wait for a specified delay. The SysTick clock is 48 MHz.
+     */
     static void SysTickWait(uint32_t delay) {
         SysTick_Init();
         if(delay <= 1){
@@ -113,14 +140,23 @@ public:
           while(( SysTick->CTRL&0x00010000) == 0){};
     }
 
+    /**
+     * Wait for a specified amount of microseconds.
+     */
     static void SysTickWaitMicros(uint32_t delay) {
         SysTickWait(delay * 48);
     }
 
+    /**
+     * Wait for a specified amount of milliseconds.
+     */
     static void SysTickWaitMillis(uint32_t delay) {
         SysTickWaitMicros(delay * 1000);
     }
 
+    /**
+     * Wait for a specified amount of seconds.
+     */
     static void SysTickWaitSeconds(uint32_t delay) {
         SysTickWaitMillis(delay * 1000);
     }
@@ -128,6 +164,11 @@ public:
 
 
 
+/**
+ * The Pin class makes reading from and writing to pins even simpler than using the helper methods.
+ *
+ * The two constructors handle the use of the two types of ports, and the setMode, write, and read methods create functionality through the Utils methods.
+ */
 class Pin
 {
 public:
@@ -136,6 +177,9 @@ public:
     Pin(DIO_PORT_Odd_Interruptable_Type* pinGroup, uint8_t pinIndex) :
             pinGroupOdd(pinGroup), pinIndex(pinIndex), pinGroupEven(0) {};
 
+    /**
+     * Sets the PinMode (OUTPUT, INPUT, INPUT_PULLUP) of this Pin.
+     */
     void setMode(enum PinMode pinMode) {
         if (pinGroupEven) {
             Utils::pinMode(pinGroupEven, pinIndex, pinMode);
@@ -144,6 +188,9 @@ public:
         }
     }
 
+    /**
+     * Writes HIGH or LOW to this Pin.
+     */
     void write(enum DigitalIO output) {
         if (pinGroupEven) {
             Utils::digitalWrite(pinGroupEven, pinIndex, output);
@@ -153,6 +200,9 @@ public:
 
     }
 
+    /**
+     * Reads HIGH or LOW from this Pin.
+     */
     enum DigitalIO read() {
         if (pinGroupEven) {
             return Utils::digitalRead(pinGroupEven, pinIndex);

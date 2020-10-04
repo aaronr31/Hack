@@ -1,10 +1,3 @@
-/*
- * Stepper.h
- *
- *  Created on: Sep 28, 2020
- *      Author: Russell
- */
-
 #ifndef STEPPER_H_
 #define STEPPER_H_
 
@@ -51,6 +44,9 @@ protected:
     int stepNumber;                 // which step the motor is on
     unsigned long lastStepTime;   // time stamp in us of when the last step was taken
 
+    /**
+     * Internal logic for stepping the motor.
+     */
     void stepMotor(int this_step);
 };
 

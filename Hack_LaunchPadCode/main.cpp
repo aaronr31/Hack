@@ -55,6 +55,9 @@ void loop(void) {
     }
 }
 
+/**
+ * Not currently used.
+ */
 void zero(void) {
     // TODO turn motor back until external switch is pressed
     while (S_EXT.read() == HIGH) {
@@ -67,6 +70,9 @@ void zero(void) {
     stepper->unpower();
 }
 
+/**
+ * Rotates the handle, holds, and then returns.
+ */
 void turnHandle(void) {
     stepper->step(HANDLE_TURN_STEPS);
 
@@ -83,7 +89,7 @@ void turnHandle(void) {
 
 
 /**
- * main.c
+ * Used to create a similar feeling to an Arduino
  */
 void main(void)
 {
